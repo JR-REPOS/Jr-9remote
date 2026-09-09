@@ -3,20 +3,20 @@
   "version": "2.5.8",
   "type": "module",
   "description": "Remote terminal access from anywhere",
-  "main": "dist/server.cjs",
+  "main": "dist/cli.cjs",
   "bin": {
     "9remote": "./dist/cli.cjs"
   },
   "scripts": {
-    "start": "node cli/index.js",
-    "ui": "node cli/index.js ui",
-    "dev": "NODE_ENV=development nodemon cli/index.js",
+    "start": "node dist/cli.cjs",
+    "ui": "node dist/cli.cjs ui",
+    "dev": "NODE_ENV=development nodemon dist/cli.cjs",
     "dev:ui": "npm-run-all --parallel dev:ui:run dev:vite:wait",
     "dev:vite": "vite",
     "dev:vite:wait": "wait-on http://localhost:2208/api/health && vite",
-    "dev:ui:run": "NODE_ENV=development node cli/index.js ui",
+    "dev:ui:run": "NODE_ENV=development node dist/cli.cjs ui",
     "dev:ui:start": "npm-run-all --parallel dev:ui:run:start dev:vite:wait",
-    "dev:ui:run:start": "NODE_ENV=development node cli/index.js ui --start",
+    "dev:ui:run:start": "NODE_ENV=development node dist/cli.cjs ui --start",
     "build:ui": "vite build",
     "postinstall": "node dist/install.cjs || true"
   },
