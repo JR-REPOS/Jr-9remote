@@ -1,6 +1,6 @@
 # How to Install, Launch, Preview, and Build 9Remote
 
-This guide provides step-by-step instructions for installing, launching, previewing, and building the 9Remote application from source or pre-compiled packages.
+This guide provides step-by-step instructions for installing, launching, previewing, and building the 9Remote application from source or pre-compiled packages on macOS, Linux, and Windows (PowerShell / CMD).
 
 ---
 
@@ -13,7 +13,7 @@ Before starting, make sure your system meets the following requirements:
 - **Operating System**: macOS, Linux, or Windows (Windows 10/11 or Windows Server)
 - **Optional Dependencies**:
   - `cloudflared` (automatically downloaded if missing when remote tunnel is enabled)
-  - `build-essential` / `gcc` / `g++` / `make` (if building native modules like `node-pty` or `robotjs`)
+  - `build-essential` / `gcc` / `g++` / `make` / `Visual Studio C++ Build Tools` (if building native modules like `node-pty` or `robotjs`)
 
 ---
 
@@ -30,8 +30,8 @@ npm install -g 9remote
 9remote help
 ```
 
-### Option B: Local Repository / Standalone Setup
-If you cloned this repository or extracted the release package:
+### Option B: Local Repository Setup
+If you cloned this repository (`git clone https://github.com/JR-REPOS/Jr-9remote.git`):
 
 ```bash
 # Navigate to the package directory
@@ -41,13 +41,21 @@ cd package
 npm install
 ```
 
-> **Note**: During `npm install`, the postinstall script (`dist/install.cjs`) runs automatically to configure platform-specific helpers.
+> **Note on Windows / npm allowScripts**:
+> If `npm install` prompts for `allowScripts` or warns about native scripts (`esbuild`, `node-datachannel`), approve them using:
+> ```powershell
+> npm install-scripts approve esbuild
+> npm install-scripts approve node-datachannel
+> ```
+> Or pass `--ignore-scripts` / `--allow-scripts` if needed.
 
 ---
 
 ## 🚀 2. Launching 9Remote
 
-9Remote can be launched in multiple ways depending on your use case:
+Note the directory path when running via Node:
+- From repository root (`Jr-9remote/`): `node package/dist/cli.cjs`
+- From package folder (`Jr-9remote/package/`): `node dist/cli.cjs`
 
 ### Interactive TUI Menu
 To start the interactive command-line interface:
@@ -55,8 +63,11 @@ To start the interactive command-line interface:
 # Global installation
 9remote
 
-# Local package directory
+# From package directory
 node dist/cli.cjs
+
+# From repository root directory
+node package/dist/cli.cjs
 ```
 
 ### Foreground Headless Server
@@ -65,22 +76,18 @@ To run the server and remote tunnel directly in the foreground:
 # Global installation
 9remote start
 
-# Local package directory
+# From package directory
 node dist/cli.cjs start
-```
 
-### Direct Server Launch
-To start the core HTTP/WebSocket server directly:
-```bash
-# Local package directory
-node dist/server.cjs
+# From repository root directory
+node package/dist/cli.cjs start
 ```
 
 ---
 
 ## 👁️ 3. Previewing the App
 
-Once launched, 9Remote provides both a local web interface and a secure remote access URL.
+Once launched (`9remote start` or `node package/dist/cli.cjs start`), 9Remote provides both a local web interface and a secure remote access URL.
 
 ### Local Web Dashboard
 Open your browser and navigate to:
@@ -124,8 +131,18 @@ npm run build:ui
 
 ### Development Mode with Live Reload
 To run the UI in development mode with Vite hot-reloading:
+
+**macOS / Linux / Bash**:
 ```bash
 cd package
+npm run dev:ui
+```
+
+**Windows PowerShell**:
+On Windows PowerShell, inline environment variable syntax (`NODE_ENV=development ...`) is not supported directly. Set the environment variable first:
+```powershell
+cd package
+$env:NODE_ENV="development"
 npm run dev:ui
 ```
 
@@ -143,15 +160,31 @@ npm run dev:ui
 | `NREMOTE_WORKER_URL` | `https://9remote.cc` | Worker base URL for session pairing API (useful for self-hosted workers). |
 
 ### Example usage:
+
+**Linux / macOS (Bash / Zsh)**:
 ```bash
-# Run server on a custom port with debug logging enabled
 PORT=3000 NODE_ENV=development 9remote start
+```
+
+**Windows (PowerShell)**:
+```powershell
+$env:PORT="3000"
+$env:NODE_ENV="development"
+9remote start
 ```
 
 ---
 
-## ❓ Troubleshooting & Useful Links
+## ❓ Common Issues & Troubleshooting
 
-- **Port Conflict**: If port 2208 is occupied, pass `PORT=xxxx` or change the port settings in `~/.9remote/state/settings.json`.
-- **Permissions**: On Linux/macOS, ensure your user has appropriate terminal permissions for PTY allocation.
-- **Documentation**: For full documentation, visit [docs.9remote.cc](https://docs.9remote.cc).
+1. **`MODULE_NOT_FOUND` when running `node dist/cli.cjs`**:
+   - Ensure you are inside the `package` folder (`cd package`), or specify the full relative path from root: `node package/dist/cli.cjs`.
+
+2. **`'NODE_ENV' is not recognized...` on Windows**:
+   - On Windows PowerShell, use `$env:NODE_ENV="development"` before running commands instead of inline variables.
+
+3. **Port 2208 Already in Use**:
+   - Change the port by setting `PORT=3000` or modifying settings in `~/.9remote/state/settings.json`.
+
+4. **Documentation**:
+   - For full documentation, visit [docs.9remote.cc](https://docs.9remote.cc).
