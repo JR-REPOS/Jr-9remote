@@ -44,7 +44,7 @@ This usually happens when you export a JSX literal and not the component.
 
 `+pe(d))}else p!=="a"&&p!=="button"||Mt(d).indexOf(p)!==-1&&console.error("Improper nesting of interactive content. Your <"+p+"> should not have other "+(p==="a"?"anchor":"button")+" tags as child-elements."+_e(d)+`
 
-`+pe(d))}if(e=!1,n&&n(d),d.__k!=null)for(var ee=[],S=0;S<d.__k.length;S++){var D=d.__k[S];if(D&&D.key!=null){var M=D.key;if(ee.indexOf(M)!==-1){console.error('Following component has two or more children with the same key attribute: "'+M+`". This may cause glitches and misbehavior in rendering process. Component:
+`+pe(d))}if(e=!1,n&&n(d),d.__k!=null)for(var ee=[],S=0;S<d.__k.length;S++){var D=d.__k[S];if(D&&D.key!=null){var M=D.key;if(ee.indexOf(M)!==-1){console.error('Following component has two or more children with the same key attribute: "'+M+`". This may cause glitches and misbehavior in rendering process. Component: 
 
 `+_e(d)+`
 
