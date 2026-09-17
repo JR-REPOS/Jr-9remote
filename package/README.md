@@ -158,7 +158,7 @@ Perfect for testing responsive design on real devices, sharing WIP builds, or mo
 <details>
 <summary><b>💰 Is it free?</b></summary>
 
-**Yes.** Free to use, no signup, no credit card. MIT licensed.
+**Yes.** Free to use during the development phase, no signup, no credit card. Will be MIT licensed after the open-source milestone.
 
 </details>
 
@@ -227,7 +227,7 @@ Perfect for testing responsive design on real devices, sharing WIP builds, or mo
 
 ## 📄 License
 
-MIT © 9Team
+Proprietary © 9Team (MIT planned after open-source milestone)
 
 ---
 

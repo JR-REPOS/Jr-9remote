@@ -103,7 +103,7 @@
 ## 8. UI Technology Details
 
 ### Embedded Dashboard (Preact)
-- **Framework:** Preact 10.x (React-compatible, ~3KB)
+- **Framework:** Preact 10.x core (~3KB); full app bundle is larger
 - **Build:** Vite 6.x with JavaScript obfuscation in production
 - **Styling:** Tailwind CSS 3.x
 - **Icons:** Material Symbols (Google Fonts)
@@ -111,6 +111,6 @@
 - **Theme:** Dark/light mode, persisted in `localStorage` as `9remote-theme`
 
 ### Web Client (Phone/Browser)
-- **Framework:** Next.js 16 + React 19
-- **Styling:** Tailwind CSS 4
+- **Framework:** Preact SPA (same embedded dashboard)
+- **Styling:** Tailwind CSS 3.x
 - **Deployment:** 9remote.cc (Cloudflare)

@@ -112,7 +112,7 @@ interface UIState {
   transport: {
     signaling: 'connected' | 'connecting' | 'off';
     rtcDisabled: boolean;
-    remoteAvailable: boolean;
+    remoteAvailable: boolean; // derived from a health check (`/api/health`)
   };
 }
 ```

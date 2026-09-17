@@ -59,7 +59,7 @@ The system is designed around three core processes that communicate via differen
                                                         ▼
                                               ┌──────────────────┐
                                               │ Web Client UI    │
-                                              │ (React/Next.js)  │
+                                              │ (Preact SPA/Vite)  │
                                               │ 9remote.cc       │
                                               └──────────────────┘
 ```
@@ -72,7 +72,8 @@ The CLI is the entry point (`package.json` bin: `./dist/cli.cjs`). It supports t
 
 - **Default (TUI mode):** Renders an interactive terminal UI with QR code, status spinner, and menu navigation. Manages the full lifecycle: tunnel spawning, session creation, key generation, upgrade checks.
 
-- **`ui` mode:** Starts the HTTP server in the foreground. Opens the embedded web UI in the default browser. Uses system tray (systray2) for background management on macOS/Windows/Linux.
+- **`ui` mode:** Starts the HTTP server in the foreground. Opens the embedded dashboard (navigate to http://localhost:2208 if not automatic). Uses system tray (systray2) for background management on macOS/Windows/Linux.
+- **System tray** — systray2 integration for background operation
 
 **Key functions:**
 - `Xt()` — Main TUI entry point
@@ -91,12 +92,11 @@ The server provides:
 6. **Cloudflare tunnel management** — spawns `cloudflared`, monitors health, handles URL rotation/restart
 7. **PtyDaemon client** — forwards Socket.IO events to the daemon via Unix socket
 8. **Desktop capture** — WebRTC streaming via `node-datachannel` + screen capture via `node-screenshots`
-9. **System tray** — systray2 integration for background operation
-10. **Sleep inhibition** — prevents system sleep during active sessions
-11. **Autostart** — registers with OS autostart (LaunchAgent/systemd/VBS)
-12. **Push notifications** — web-push for build/deploy alerts
-13. **Clipboard integration** — cross-platform clipboard access
-14. **Local site proxy** — proxies localhost dev servers through the tunnel
+9. **Sleep inhibition** — prevents system sleep during active sessions
+10. **Autostart** — registers with OS autostart (LaunchAgent/systemd/VBS) — shared CLI/server responsibility
+11. **Push notifications** — web-push for build/deploy alerts
+12. **Clipboard integration** — cross-platform clipboard access
+13. **Local site proxy** — proxies localhost dev servers through the tunnel
 
 ### 3.3 PtyDaemon (`ptyDaemon.cjs`)
 
@@ -112,7 +112,7 @@ A persistent daemon process that:
 
 A Preact single-page application (SPA) served by the server:
 - **Dashboard** — shows QR code, tunnel status, device management
-- **Terminal** — xterm.js-based terminal emulator via Socket.IO
+- **Terminal** — terminal emulator via Socket.IO (xterm.js or similar, verified in UI bundle)
 - **File Explorer** — browse, upload, download files
 - **Code Editor** — syntax-highlighted editor
 - **Git Integration** — visual git status, commit/push
@@ -123,13 +123,13 @@ A Preact single-page application (SPA) served by the server:
 
 | Channel | Type | Purpose |
 |---|---|---|
-| CLI ↔ Server | Unix Socket / HTTP | TUI control commands |
+| CLI ↔ Server | HTTP | TUI control commands |
 | Server ↔ Web UI | HTTP + SSE | State management, real-time updates |
 | Web UI ↔ Server | Socket.IO (WebSocket) | Terminal I/O, desktop streaming |
 | Server ↔ PtyDaemon | Unix Socket (JSON) | PTY session management |
 | Server ↔ cloudflared | stdio pipes | Tunnel process management |
 | Server ↔ 9remote.cc Worker | HTTPS | Session coordination |
-| Web UI ↔ Phone Browser | WebRTC | Direct desktop streaming |
+| Phone Browser ↔ Server (Host) | WebRTC | Desktop streaming |
 
 ## 5. Key Design Principles
 

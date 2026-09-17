@@ -173,7 +173,6 @@ The prompt is implemented as a full-screen TUI:
 | `y` / `Enter` | Device approved, connection continues |
 | `n` / `Esc` | Device rejected, connection blocked |
 | `Ctrl+C` | Exit without approving, device remains pending |
-| Timeout (30s) | Device rejected automatically |
 
 ### 5.4 Auto-Approve
 

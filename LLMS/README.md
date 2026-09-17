@@ -31,7 +31,6 @@ LLMS/
 │   ├── environment-vars.md # Environment variables
 │   └── constants.md        # Key constants and defaults
 ├── deployment/             # Deployment documentation
-│   ├── deployment.md       # Deployment architecture
 │   ├── cloudflare-worker.md# Cloudflare Worker API
 │   └── cloudflare-tunnel.md# Cloudflare Tunnel integration
 ├── cli/                    # CLI reference
@@ -40,8 +39,7 @@ LLMS/
 ├── troubleshooting/        # Troubleshooting guides
 │   ├── troubleshooting.md  # Common issues and solutions
 │   └── error-codes.md      # Error codes and messages
-├── mode-assignments.md     # Mode-to-file assignment manifest
-└── _template.md            # Documentation template
+└── mode-assignments.md     # Mode-to-file assignment manifest
 ```
 
 ## Quick Links

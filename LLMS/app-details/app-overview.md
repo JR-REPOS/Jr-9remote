@@ -15,7 +15,7 @@
 - **Git Integration** — Run git commands with visual status
 - **Local Sites Proxy** — Expose `localhost:3000` to your phone
 - **Push Notifications** — Get notified when builds finish
-- **AI Integration** — Works with Claude Code, Codex, Cursor, OpenClaw
+- **AI Integration** — Works with Claude Code, Codex, Cursor, OpenCode
 
 ### The Problem
 
@@ -53,7 +53,7 @@ It uses **Cloudflare Quick Tunnel** (outbound-only, no port forwarding) and **QR
 | Persistent Sessions | PTY daemon survives restarts | Long-running commands stay alive |
 | Multi-Device Sync | Same session across phone/tablet/laptop | Switch devices without losing context |
 | Push Notifications | Build finished? Get notified | Never miss a critical event |
-| AI Integration | Works with Claude Code, Codex, OpenClaw | Code with AI from anywhere |
+| AI Integration | Works with Claude Code, Codex, OpenCode | Code with AI from anywhere |
 | Local Sites Proxy | Expose `localhost:3000` to phone | Test dev servers on mobile instantly |
 | Low Latency | <50ms typical, WebRTC for desktop | Feels like local |
 | Pair Device | Approve each device before it connects | No unauthorized access, full control |
@@ -92,7 +92,7 @@ PagerDuty alert at 3 AM. Don't want to power on laptop.
 | Command | Description |
 |---------|-------------|
 | `9remote` | TUI mode — interactive menu with QR code |
-| `9remote ui` | Web UI mode — opens browser dashboard at `localhost:2208` |
+| `9remote ui` | Web UI mode — opens the embedded dashboard in the default browser (or navigate to http://localhost:2208) |
 
 ### Environment Variables
 
@@ -139,9 +139,9 @@ PagerDuty alert at 3 AM. Don't want to power on laptop.
 - **Default port:** 2208
 - **Vite dev port:** 5173
 - **Worker URL:** `https://9remote.cc`
-- **Session key length:** 16 characters (first 8 of SHA256)
+- **Session key length:** 16 characters total (8-char keyId from first 8 of SHA256, 4 random, 4 more)
 - **One-time key expiry:** 30 minutes
 - **Tunnel timeout:** 90 seconds (health check)
 - **Tunnel retry backoff:** exponential, base 2s, max 5 min
-- **Log rotation:** 2KB max, 7-day cleanup
+- **Log rotation:** 2MB max, 7-day cleanup
 - **Update check retry:** exponential, base 1s, max 60s

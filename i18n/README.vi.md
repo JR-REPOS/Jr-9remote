@@ -295,7 +295,7 @@ Hoàn hảo cho:
 <summary><b>🔒 9Remote có an toàn không?</b></summary>
 
 **Có.** 9Remote dùng hệ thống **Pair Device** — mọi thiết bị mới phải được bạn duyệt trước khi được quyền truy cập host. Ngoài ra:
-- Không mở port nào trên máy (Cloudflare tunnel chỉ outbound)
+- Không cần mở port router nào — Cloudflare Tunnel chỉ outbound (port 2208 cục bộ được dùng cho dashboard).
 - Key không bao giờ được lưu trên server sau khi phiên kết thúc
 - Không thu thập terminal output, file hay dữ liệu màn hình
 - One-time QR key hết hạn sau 30 phút
@@ -373,15 +373,15 @@ Chạy chúng trên máy host, truy cập từ điện thoại. Kết hợp vớ
 
 ## 🛠️ Công Nghệ Sử Dụng
 
-- **Runtime:** Node.js 20+
+- **Runtime:** Node.js 18+ (20 recommended)
 - **Tunnel:** [Cloudflare Quick Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) — tunnel bảo mật không cấu hình
 - **Terminal:** [node-pty](https://github.com/microsoft/node-pty) — phiên PTY bền bỉ
 - **Remote Desktop:** [node-datachannel](https://github.com/murat-dogan/node-datachannel) (WebRTC) + [robotjs](https://github.com/octalmage/robotjs) (điều khiển input)
 - **Real-time:** [Socket.IO](https://socket.io/) — streaming terminal + signaling WebRTC
 - **Agent UI:** [Preact](https://preactjs.com/) — dashboard nhúng nhẹ
-- **Web Client:** [Next.js 16](https://nextjs.org/) + React 19 + Tailwind CSS 4
-- **Desktop App:** [Tauri 2](https://tauri.app/) — shell native có auto-updater
-- **Mobile App:** [Expo](https://expo.dev/) — React Native với WebView shell
+- **Web Client:** Preact 10 + Vite + Tailwind CSS 3 (embedded dashboard)
+- **Desktop App:** Tauri
+- **Mobile Client:** Web-based (any modern browser)
 - **Edge API:** Cloudflare Workers — quản lý phiên + TURN credentials
 
 ---

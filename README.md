@@ -295,7 +295,7 @@ Perfect for:
 <summary><b>🔒 Is 9Remote secure?</b></summary>
 
 **Yes.** 9Remote uses a **Pair Device** approval system — every new device must be explicitly approved by you before it can access the host. Plus:
-- No open ports on your machine (Cloudflare tunnel, outbound-only)
+- No inbound router ports required — Cloudflare Tunnel is outbound-only (local port 2208 is used for the dashboard).
 - Keys are never stored on our servers after the session ends
 - No terminal output, files, or screen data is collected
 - One-time QR keys expire in 30 minutes
@@ -373,15 +373,15 @@ Run them on your host machine, access them from your phone. Combined with [9Rout
 
 ## 🛠️ Tech Stack
 
-- **Runtime:** Node.js 20+
+- **Runtime:** Node.js 18+ (20 recommended)
 - **Tunnel:** [Cloudflare Quick Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) — zero-config secure tunnel
 - **Terminal:** [node-pty](https://github.com/microsoft/node-pty) — persistent PTY sessions
 - **Remote Desktop:** [node-datachannel](https://github.com/murat-dogan/node-datachannel) (WebRTC) + [robotjs](https://github.com/octalmage/robotjs) (input control)
 - **Real-time:** [Socket.IO](https://socket.io/) — terminal streaming + WebRTC signaling
 - **Agent UI:** [Preact](https://preactjs.com/) — lightweight embedded dashboard
-- **Web Client:** [Next.js 16](https://nextjs.org/) + React 19 + Tailwind CSS 4
-- **Desktop App:** [Tauri 2](https://tauri.app/) — native shell with auto-updater
-- **Mobile App:** [Expo](https://expo.dev/) — React Native with WebView shell
+- **Web Client:** Preact 10 + Vite + Tailwind CSS 3 (embedded dashboard)
+- **Desktop App:** Tauri (native shell)
+- **Mobile Client:** Web-based (any modern browser)
 - **Edge API:** Cloudflare Workers — session management + TURN credentials
 
 ---

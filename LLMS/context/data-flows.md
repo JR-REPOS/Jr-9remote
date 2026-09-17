@@ -150,7 +150,7 @@ sk-{first-8-of-permanent}-{4-random-chars}-{6-char-hmac}
 - `sk-` prefix
 - 8-char slice of permanent key
 - 4 random chars from `abcdefghijklmnopqrstuvwxyz0123456789`
-- 6-char HMAC-SHA256 truncated from (keyId + apiKeySecret + apiKeySecret)
+- 6-char HMAC-SHA256 truncated from (keyId + random4)
 
 ### Authentication Flow:
 1. CLI generates permanent key on first run
@@ -229,7 +229,7 @@ sk-{first-8-of-permanent}-{4-random-chars}-{6-char-hmac}
 | Command file | `~/.9remote/state/cmd.json` | JSON | TUI → Server |
 | Keys (machineId, key, name) | `~/.9remote/keys.json` | JSON | CLI (`fs`) |
 | PTY sessions | In-memory (daemon) | N/A | PtyDaemon |
-| Agent logs | `~/.9remote/logs/agent.log` | Text | Server (2KB rotation) |
+| Agent logs | `~/.9remote/logs/agent.log` | Text | Server (2MB rotation) |
 | PID files | `~/.9remote/pids/{name}.pid` | Text | Various |
 | cloudflared PID | `~/.9remote/pids/cloudflared.pid` | Text | Server |
 | Agent PID | `~/.9remote/pids/agent.pid` | Text | CLI/Server |
@@ -247,6 +247,6 @@ sk-{first-8-of-permanent}-{4-random-chars}-{6-char-hmac}
 │                                                     │
 │  Whichever connects first wins → other is discarded │
 │  → Local when on same WiFi, tunnel when remote      │
-│  → Latency: <5ms local vs ~50ms tunnel              │
+│  → Lower latency local vs tunnel                  │
 └─────────────────────────────────────────────────────┘
 ```

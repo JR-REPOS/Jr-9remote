@@ -119,9 +119,9 @@ rm -f "$LOCK_FILE"
 node "$NODE_PATH" "$CLI_PATH" --tray --skip-update --start
 ```
 
-### 4.2 Windows Script (bash → cmd)
+### 4.2 Windows Script (cmd/bat + VBS wrapper)
 
-Uses a `.bat` file with `taskkill` and a `.vbs` wrapper for background execution:
+Uses a `.bat` file and `.vbs` wrapper for background execution:
 
 ```batch
 tasklist /FI "PID eq %AGENT_PID%" 2>nul | find "%AGENT_PID%" >nul
@@ -185,7 +185,7 @@ Before starting an upgrade, the system checks several conditions:
 1. **Platform support:** Only `darwin` (macOS), `win32` (Windows), and `linux` are supported
 2. **Worker connectivity:** Must be able to reach `9remote.cc` worker
 3. **Build integrity:** Verifies the npm package tarball SHA256
-4. **Task registration:** On Windows, registers a UAC-elevated task for installation
+4. **Windows background script:** On Windows, uses a VBS wrapper to run the update script in the background
 5. **Worker liveness:** Checks if a previous update worker is still running
 
 ## 6. Post-Upgrade

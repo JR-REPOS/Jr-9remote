@@ -8,9 +8,9 @@
 
 9Remote's security model is built around three core principles:
 
-1. **Zero Trust** — Every device must be explicitly approved before accessing the host
+1. **Zero Trust** — Zero Trust by default; auto-approve option available
 2. **No Open Ports** — Uses outbound-only Cloudflare Tunnel, no port forwarding required
-3. **Privacy First** — No terminal data, screen data, or files are collected or stored on servers
+3. **Privacy First** — No user content (terminal output, files, screen captures) is stored; minimal operational metadata is collected (Socket ID, IP, timestamp, device metadata, update checks)
 
 ## 2. Authentication
 
@@ -117,7 +117,7 @@ Rules:
 
 ### 4.3 Origin Validation
 
-For sensitive endpoints, the `origin` header is validated against an allowlist:
+For sensitive endpoints, the `origin` header is validated against an allowlist (contents not fully verifiable from truncated source):
 - `https://9remote.cc`
 - `https://*.trycloudflare.com`
 - `http://localhost:*`
@@ -154,7 +154,7 @@ All collected data is used solely for the operation of the service and is not us
 | Channel | Protocol | Encryption |
 |---------|----------|------------|
 | Cloudflare Tunnel | HTTPS/WSS | TLS 1.2+ (Cloudflare-managed) |
-| WebRTC Desktop | DTLS-SRTP | End-to-end (WebRTC standard) |
+| WebRTC Desktop | DTLS-SRTP | DTLS-SRTP over Cloudflare Tunnel (TLS to Cloudflare edge) |
 | Socket.IO (local) | WebSocket | None (LAN only, optional) |
 | Terminal I/O | WebSocket over tunnel | TLS via Cloudflare |
 | cloudflared CLI | HTTPS | TLS 1.2+ |
@@ -175,7 +175,7 @@ All collected data is used solely for the operation of the service and is not us
 ### 7.2 Key Rotation
 
 - **One-time keys:** Auto-expire after 30 minutes; can be regenerated from TUI menu: `Keys → Regenerate`
-- **Permanent keys:** Tied to machine ID; changing the machine ID or salt requires re-pairing all devices
+- **Permanent keys:** Tied to machine ID (hardware); OS reinstall means new key = re-pair all devices
 - **API key secret:** Changing `API_KEY_SECRET` invalidates all existing one-time keys
 
 ## 8. Threat Model
@@ -204,7 +204,7 @@ All collected data is used solely for the operation of the service and is not us
 ## 9. Security Checklist
 
 - [x] No open ports on host machine
-- [x] All remote traffic encrypted via TLS
+- [x] All remote traffic encrypted via TLS (remote/Cloudflare tunnel); local/LAN traffic is unencrypted WebSocket
 - [x] Zero data collection (terminal, files, screen)
 - [x] Pair Device approval for each new device
 - [x] One-time keys expire in 30 minutes

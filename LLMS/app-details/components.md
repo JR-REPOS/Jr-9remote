@@ -23,8 +23,14 @@
 │   │       ├── Cloudflare Tunnel Manager
 │   │       ├── Update Checker
 │   │       └── Autostart Manager
-│   │
-│   └── Background Mode (`--start`)
+    │   │
+    │   ├── System Tray
+    │   │   ├── systray2 native binary
+    │   │   ├── Tray icons per platform
+    │   │   ├── Menu: Open Web UI, Shutdown
+    │   │   └── Windows PowerShell tray bridge
+    │   │
+    │   └── Background Mode (`--start`)
 │       └── Server (detached process)
 │
 ├── Server (server.cjs)
@@ -49,11 +55,7 @@
 │   │   ├── Input control via @hurdlegroup/robotjs
 │   │   ├── JPEG encoding via @julusian/jpeg-turbo
 │   │   └── GPU acceleration (Windows OpenCL, macOS vImage)
-│   ├── System Tray
-│   │   ├── systray2 native binary
-│   │   ├── Tray icons per platform
-│   │   ├── Menu: Open Web UI, Shutdown
-│   │   └── Windows PowerShell tray bridge
+
 │   ├── Sleep Inhibitor
 │   │   ├── macOS: caffeinate
 │   │   ├── Linux: systemd-inhibit
@@ -63,7 +65,7 @@
 │   │   ├── Linux: systemd user service / XDG autostart
 │   │   └── Windows: Startup VBS script
 │   ├── Notification Manager
-│   │   └── web-push for push notifications
+│   │   └── web-push for push notifications (implementation detail — not visible in truncated source)
 │   ├── Update Manager
 │   │   ├── Version check from npm registry
 │   │   ├── SHA256 verification
@@ -79,7 +81,7 @@
 │   │   └── Permission polling
 │   ├── Log Manager
 │   │   ├── File-based logging (~/.9remote/logs/agent.log)
-│   │   ├── 2KB rotation, 7-day cleanup
+│   │   ├── 2MB rotation, 7-day cleanup
 │   │   └── In-memory tail (last 60 lines)
 │   ├── State Persistence
 │   │   ├── state.json (UI state, step, tunnel info)
@@ -89,7 +91,7 @@
 │   └── Local Proxy Manager
 │       ├── Detects running localhost ports
 │       ├── Proxies through tunnel
-│       └── Path: /proxy/{port}/
+│       └── Path: /proxy/{port}/ (implementation detail — not visible in truncated source)
 │
 ├── PtyDaemon (ptyDaemon.cjs)
 │   ├── Socket server (Unix socket / named pipe)
@@ -121,10 +123,10 @@
     │   ├── Theme loader (localStorage)
     │   └── Google Fonts (Sora, JetBrains Mono, Material Symbols)
     ├── assets/index-H_1CAVCP.js (bundled Preact SPA)
-    │   ├── Terminal view (xterm.js via Socket.IO)
+    │   ├── Terminal view (xterm.js via Socket.IO) (implementation detail — not visible in truncated source)
     │   ├── File Explorer (tree view, upload/download)
-    │   ├── Code Editor (syntax highlighting)
-    │   ├── Git panel (status, commit, push)
+    │   ├── Code Editor (syntax highlighting) (implementation detail — not visible in truncated source)
+    │   ├── Git panel (status, commit, push) (implementation detail — not visible in truncated source)
     │   ├── Remote Desktop viewer (WebRTC video)
     │   ├── Device management (Pair Device, approval list)
     │   ├── Settings panel (theme, autostart, sleep, permissions)
@@ -144,7 +146,7 @@ package/
     ├── cli.cjs            # CLI entry point (TUI + UI mode launcher)
     ├── server.cjs         # HTTP + Socket.IO server
     ├── ptyDaemon.cjs      # Persistent PTY daemon
-    ├── install.cjs        # Post-install script (systray2, robotjs)
+    ├── install.cjs        # Post-install script (auto-installed by the post-install script (install.cjs), robotjs)
     ├── ui/
     │   ├── index.html     # Embedded dashboard HTML
     │   ├── favicon.svg
@@ -170,7 +172,7 @@ package/
 ├── keys.json              # Machine ID, permanent key, device name
 ├── autostart.log          # Autostart-related logs
 ├── logs/
-│   ├── agent.log          # Server logs (rotated at 2KB)
+│   ├── agent.log          # Server logs (rotated at 2MB)
 │   └── agent.log.1
 ├── state/
 │   ├── state.json         # Current UI state (step, tunnelUrl, keys)

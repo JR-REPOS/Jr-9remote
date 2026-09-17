@@ -16,7 +16,7 @@ The **host** is where the 9Remote agent (CLI + server + daemon) runs.
 | **Linux** | arm64 | ✅ Full | Tested on Raspberry Pi, ARM servers |
 | **Windows** | x64 | ✅ Full | Uses PowerShell for clipboard, PowerCreateRequest for sleep |
 | **Windows** | arm64 | ⚠️ Untested | May work but not officially tested |
-| FreeBSD | — | ❌ Not supported | Machine ID detection throws "Unsupported platform" |
+| FreeBSD | — | ✅ Supported | Machine ID detection works via `kenv -q smbios.system.uuid || sysctl -n kern.hostuuid` |
 
 ### macOS-Specific Features
 
@@ -96,9 +96,9 @@ The **client** is what connects to the host from a phone or browser.
 | Client | Status | Notes |
 |--------|--------|-------|
 | **Modern Browser** | ✅ Full | Chrome, Safari, Firefox, Edge — full feature set |
-| **iOS 14+** | ✅ Full | App Store app, or mobile browser |
-| **Android 8+** | ✅ Full | Google Play app, or mobile browser |
-| **Tauri Desktop** | ✅ Full | macOS, Windows, Linux native app |
+| **iOS 14+** | ✅ Full | Mobile Safari / Chrome — web-based client (no native app artifacts in source) |
+| **Android 8+** | ✅ Full | Mobile Chrome / Edge — web-based client (no native app artifacts in source) |
+| **Tauri Desktop** | — | Not present in source; client is web-based per available source |
 
 ## 3. Cross-Platform Abstraction Layers
 

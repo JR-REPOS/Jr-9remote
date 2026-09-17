@@ -54,7 +54,7 @@ The `--protocol http2` flag enforces HTTP/2 for better multiplexing.
 | Linux | Auto-downloaded to system PATH | |
 | Windows | Auto-downloaded to system PATH | |
 
-The binary is downloaded on first run if not found. SHA256 checksums are verified during download.
+The binary is downloaded on first run if not found (SHA256 checksum verified during download). The exact cache location is not fully specified in the truncated source.
 
 ## 3. Tunnel Lifecycle Management
 

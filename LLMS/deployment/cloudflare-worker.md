@@ -214,6 +214,8 @@ sequenceDiagram
 
 To deploy a custom worker, use the Cloudflare Worker CLI:
 
+Prerequisites: a Cloudflare account with Workers quota, and a Worker implementation that exposes the required endpoints.
+
 ```bash
 npm install -g wrangler
 cd worker-repo

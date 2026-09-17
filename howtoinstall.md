@@ -14,6 +14,7 @@ Before starting, make sure your system meets the following requirements:
 - **Optional Dependencies**:
   - `cloudflared` (automatically downloaded if missing when remote tunnel is enabled)
   - `build-essential` / `gcc` / `g++` / `make` / `Visual Studio C++ Build Tools` (if building native modules like `node-pty` or `robotjs`)
+  - **Note:** `node-pty` is currently on a beta version (1.2.0-beta.12); if you encounter stability issues with terminal sessions, check for updates to a stable release.
 
 ---
 
