@@ -120,8 +120,8 @@
 
 | Mode | Files Assigned | Verified | % Verified |
 |------|----------------|----------|------------|
-| `explore` | 13 files | 4 | 31% |
-| `general` | 8 files | 3 | 38% |
+| `explore` | 14 files | 3 | 21% |
+| `general` | 11 files | 3 | 27% |
 
 ## Verification Action Items
 
@@ -139,7 +139,6 @@
 - [ ] Verify platform support (explore)
 - [ ] Verify security model (general)
 - [ ] Verify architecture and data flows (general)
-- [ ] Verify deployment topology (general)
 - [ ] Verify cloudflare-worker and cloudflare-tunnel docs (explore)
 - [ ] Verify CLI commands and TUI menu (explore)
 - [ ] Verify error codes and troubleshooting (explore/general)
