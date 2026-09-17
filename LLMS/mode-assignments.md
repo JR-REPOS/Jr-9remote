@@ -85,7 +85,7 @@
 - Backoff formula `we()`: VERIFIED (exp: `base * 2^(attempt-1)`, linear: `base * attempt`)
 - Command polling `st()`: VERIFIED (1s interval, all 7 commands)
 
-### Configuration (`config/`) — **VERIFICATION STATUS**
+### Configuration (`config/`) — **VERIFICATION PENDING**
 
 | File | Assigned Mode | Verification Status | Notes |
 |------|--------------|-------------------|-------|
@@ -99,7 +99,6 @@
 
 | File | Assigned Mode | Verification Status | Notes |
 |------|--------------|-------------------|-------|
-| `deployment/deployment.md` | `general` | ⏳ Pending | |
 | `deployment/cloudflare-worker.md` | `explore` | ⏳ Pending | |
 | `deployment/cloudflare-tunnel.md` | `explore` | ⏳ Pending | |
 
